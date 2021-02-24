@@ -1,5 +1,6 @@
 package Assignment_ACDT;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Sparse_Matrix {
@@ -10,12 +11,16 @@ public class Sparse_Matrix {
 	private int maxElement;
 	private int[][] sparseArray;
 	
-	Sparse_Matrix(int r, int c, int count)
+	Sparse_Matrix(int r, int c)
 	{
 		row =r;
 		col=c;
 		len=0;
-		maxElement= count;
+	}
+	
+	public void setSparseArraySize(int n)
+	{
+		maxElement= n;
 		sparseArray= new int[maxElement][3];
 	}
 	private void insert(int r,int c,int val)
@@ -26,6 +31,33 @@ public class Sparse_Matrix {
 		len++;
 	}
 
+	private int[][] getSparseArray()
+	{
+		return sparseArray;
+	}
+	
+	private void transposeArray(int[][] arr)
+	{
+	
+		for(int i=0;i<arr.length;i++)
+		{
+			int temp = arr[i][0];
+			arr[i][0] = arr[i][1];
+			arr[i][1] = temp;
+		}
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			for(int j=0;j<3;j++)
+			{
+				System.out.print(arr[i][j]+" ");
+			}
+			System.out.println();
+		}
+		
+	}
+	
+	
 	private void display()
 	{
 		/*System.out.println(maxElement);*/
@@ -65,7 +97,8 @@ public class Sparse_Matrix {
 			}
 		}
 
-		Sparse_Matrix obj= new Sparse_Matrix(row, col, count);
+		Sparse_Matrix obj= new Sparse_Matrix(row, col);
+		obj.setSparseArraySize(count);
 		for(int i=0;i<row;i++)
 		{
 			for(int j=0;j<col;j++)
@@ -77,6 +110,11 @@ public class Sparse_Matrix {
 			}
 		}
 		obj.display();
+		
+		int[][] sparseArray= obj.getSparseArray();
+		obj.transposeArray(sparseArray);
+		
+		
 	}
 
 }
